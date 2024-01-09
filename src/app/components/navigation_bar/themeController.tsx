@@ -1,9 +1,18 @@
-"use client";
 import { useDarkMode } from "usehooks-ts";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const themeController = () => {
   const { isDarkMode, toggle, enable, disable } = useDarkMode();
+
+  const [selectedTheme, setSelectedTheme] = useState(
+    localStorage.getItem("selectedTheme") || "cyberpunk"
+  );
+
+  const handleThemeChange = (theme: string) => {
+    setSelectedTheme(theme);
+    localStorage.setItem("selectedTheme", theme);
+  };
+
   return (
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn m-1">
@@ -30,6 +39,7 @@ const themeController = () => {
             aria-label="Cyberpunk"
             value="cyberpunk"
             onClick={disable}
+            defaultChecked={selectedTheme === "cyberpunk"}
           />
         </li>
         <li>
@@ -40,6 +50,7 @@ const themeController = () => {
             aria-label="Night"
             value="night"
             onClick={enable}
+            defaultChecked={selectedTheme === "night"}
           />
         </li>
       </ul>
