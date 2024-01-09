@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import Image from "next/image";
 import { useDarkMode } from "usehooks-ts";
@@ -12,7 +11,13 @@ const Logo = () => {
 
   return (
     <div>
-      <Image src={logoImage} alt="Logo" width={90} height={90} />
+      <Image
+        src={logoImage}
+        alt="Logo"
+        width={100}
+        height={100}
+        className="object-cover w-auto h-4"
+      />
     </div>
   );
 };
