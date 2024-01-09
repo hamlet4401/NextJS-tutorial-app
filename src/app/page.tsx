@@ -1,3 +1,3 @@
 export default function Page() {
-  return <div>Home screen</div>;
+  return <div className="m-8">Home screen</div>;
 }
