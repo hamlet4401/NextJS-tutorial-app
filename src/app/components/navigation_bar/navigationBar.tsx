@@ -1,7 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import { default as ThemeController } from "./components/themeController";
-import Image from "next/image";
+import { default as ThemeController } from "../themeController";
 import { default as Logo } from "./logo";
 
 const navigationBar = () => {

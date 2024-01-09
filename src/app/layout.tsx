@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import "./globals.css";
-import { default as NavigationBar } from "./navigationBar";
+import { default as NavigationBar } from "./components/navigation_bar/navigationBar";
 
 export const metadata: Metadata = {
   title: "Create Next App",
