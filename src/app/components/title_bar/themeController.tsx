@@ -3,8 +3,7 @@ import React, { useState, useEffect } from "react";
 
 const ThemeController = () => {
   const { isDarkMode, toggle, enable, disable } = useDarkMode();
-  const [selectedTheme, setSelectedTheme] = useState("cyberpunk"
-  );
+  const [selectedTheme, setSelectedTheme] = useState("cyberpunk");
 
   useEffect(() => {
     if (typeof window !== "undefined") {

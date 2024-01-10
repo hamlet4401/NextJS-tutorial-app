@@ -9,7 +9,7 @@ const TitleBar = () => {
   const router = useRouter();
   return (
     <nav className="">
-      <div className="flex justify-between items-center border-b-2 m-2">
+      <div className="flex justify-between items-center border-b-2">
         <div className="flex space-x-6 items-center">
           <Link href="/">
             <Logo />
