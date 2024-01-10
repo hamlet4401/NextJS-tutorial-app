@@ -1,18 +1,31 @@
 import { useDarkMode } from "usehooks-ts";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-const themeController = () => {
+const ThemeController = () => {
   const { isDarkMode, toggle, enable, disable } = useDarkMode();
-
-  const [selectedTheme, setSelectedTheme] = useState(
-    localStorage.getItem("selectedTheme") || "cyberpunk"
+  const [selectedTheme, setSelectedTheme] = useState("cyberpunk"
   );
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      // Make sure to set the theme on component mount
+      if (selectedTheme === "night") {
+        enable();
+      } else {
+        disable();
+      }
+    }
+  }, []);
 
   const handleThemeChange = (theme: string) => {
     setSelectedTheme(theme);
     localStorage.setItem("selectedTheme", theme);
+    if (theme === "night") {
+      enable();
+    } else {
+      disable();
+    }
   };
-
   return (
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn m-1">
@@ -58,4 +71,4 @@ const themeController = () => {
   );
 };
 
-export default themeController;
+export default ThemeController;
