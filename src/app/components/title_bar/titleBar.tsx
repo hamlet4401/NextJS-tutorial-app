@@ -5,7 +5,7 @@ import { default as ThemeController } from "./themeController";
 import { default as Logo } from "./logo";
 import { useRouter } from "next/navigation";
 
-const navigationBar = () => {
+const TitleBar = () => {
   const router = useRouter();
   return (
     <nav className="">
@@ -33,4 +33,4 @@ const navigationBar = () => {
   );
 };
 
-export default navigationBar;
+export default TitleBar;

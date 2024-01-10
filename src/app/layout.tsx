@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import "./globals.css";
-import { default as NavigationBar } from "./components/navigation_bar/navigationBar";
+import { default as TitleBar } from "./components/title_bar/titleBar";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme="cyberpunk">
       <body className={manrope.className}>
-        <NavigationBar />
+        <TitleBar />
         <main>{children}</main>
       </body>
     </html>
