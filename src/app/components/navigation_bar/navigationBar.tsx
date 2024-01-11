@@ -26,8 +26,9 @@ const NavigationBar = () => {
             type="radio"
             name="my-accordion-2"
             checked={selectedMenu === menuItem.id}
+            onChange={() => {}}
           />
-          <div className="collapse-title text-xl font-medium">
+          <div className="collapse-title">
             Click to open this one and close others
           </div>
           <div className="collapse-content">
