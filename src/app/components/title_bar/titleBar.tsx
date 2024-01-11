@@ -16,13 +16,19 @@ const TitleBar = () => {
           </Link>
           <ul className="flex space-x-3 mx-4 hover:bg-secondary-focus">
             <li>
-              <button className="btn" onClick={() => router.push("/page2")}>
-                Page 2
+              <button
+                className="btn"
+                onClick={() => router.push("/notepad_app")}
+              >
+                Notepad App
               </button>
             </li>
             <li>
-              <button className="btn" onClick={() => router.push("/page3")}>
-                Page 3
+              <button
+                className="btn"
+                onClick={() => router.push("/timer_apps")}
+              >
+                Timer Apps
               </button>
             </li>
           </ul>
