@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 import { useDarkMode } from "usehooks-ts";
@@ -22,9 +23,7 @@ const LogoDependingOnTheme = (
       <Image
         src={logoImage}
         alt="Logo"
-        width={100}
-        height={100}
-        className={`object-cover w-auto h-${logoDependingOnThemeProps.height}`}
+        className={`object-scale-down h-${logoDependingOnThemeProps.height} w-auto`}
       />
     </div>
   );
