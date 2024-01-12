@@ -1,26 +1,24 @@
-import { useDarkMode } from "usehooks-ts";
+"use client";
 import React, { useState, useEffect } from "react";
+import { useDarkMode } from "usehooks-ts";
 
 interface ThemeControllerProps {
   themes: Record<string, boolean>;
 }
 
 const ThemeController = (themeControllerProps: ThemeControllerProps) => {
+  const storedTheme = localStorage.getItem("theme");
+  const currentTheme =
+    storedTheme || Object.keys(themeControllerProps.themes)[0];
   const { isDarkMode, toggle, enable, disable } = useDarkMode();
-  const [selectedTheme, setSelectedTheme] = useState(
-    Object.keys(themeControllerProps.themes)[0]
-  );
+  const [selectedTheme, setSelectedTheme] = useState(currentTheme);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      // if dark theme flag enabled
-      if (themeControllerProps.themes.selectedTheme) {
-        enable();
-      } else {
-        disable();
-      }
-    }
-  }, []);
+    const isDark = themeControllerProps.themes[currentTheme];
+    isDark ? enable() : disable();
+
+    localStorage.setItem("usehooks-ts-dark-mode", isDark.toString());
+  }, [enable, disable]);
 
   return (
     <div className="dropdown">
@@ -49,7 +47,11 @@ const ThemeController = (themeControllerProps: ThemeControllerProps) => {
                 className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
                 aria-label={theme}
                 value={theme.toLowerCase()}
-                onClick={darkTheme ? enable : disable}
+                onClick={() => {
+                  darkTheme ? enable() : disable();
+                  setSelectedTheme(theme);
+                  localStorage.setItem("theme", theme);
+                }}
                 defaultChecked={selectedTheme === theme}
               />
             </li>

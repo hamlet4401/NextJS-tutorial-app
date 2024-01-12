@@ -1,21 +1,26 @@
+"use client";
 import React, { ReactNode } from "react";
+import { default as LogoDependingOnTheme } from "../navigation_bar/logoDependingOnTheme";
 
 interface SideMenuButtonProps {
-  iconSource: string;
+  iconSourceDarkMode: string;
+  iconSourceLightMode: string;
   alternativeIconText: string;
+  onClickEvent: () => void;
   children: ReactNode;
 }
 
-const SideMenuButton = (navigationBarButtonProps: SideMenuButtonProps) => {
+const SideMenuButton = (sideMenuButtonProps: SideMenuButtonProps) => {
   return (
-    <button className="btn w-full justify-between">
-      {navigationBarButtonProps.children}
-      <img
-        src={navigationBarButtonProps.iconSource}
-        alt={navigationBarButtonProps.alternativeIconText}
-        width={100}
-        height={100}
-        className="mr-1 w-auto h-5"
+    <button
+      className="btn w-full justify-between"
+      onClick={() => sideMenuButtonProps.onClickEvent()}
+    >
+      {sideMenuButtonProps.children}
+      <LogoDependingOnTheme
+        darkModeLogo={sideMenuButtonProps.iconSourceDarkMode}
+        lightModeLogo={sideMenuButtonProps.iconSourceLightMode}
+        height={3}
       />
     </button>
   );

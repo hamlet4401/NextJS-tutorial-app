@@ -2,7 +2,10 @@
 import Link from "next/link";
 import React from "react";
 import { default as ThemeButton } from "./themeButton";
-import { default as LogoDependingOnTheme } from "../components/navigation_bar/LogoDependingOnTheme";
+import { default as LogoDependingOnTheme } from "../components/navigation_bar/logoDependingOnTheme";
+
+import logoLightTheme from "../../../public/light_mode/bodidata_logo.svg";
+import logoDarkTheme from "../../../public/dark_mode/bodidata_logo.svg";
 
 const TitleBar = () => {
   return (
@@ -12,8 +15,8 @@ const TitleBar = () => {
           <Link href="/">
             <LogoDependingOnTheme
               height={4}
-              darkModeLogo="/bodidata_logo_dark_mode.svg"
-              lightModeLogo="/bodidata_logo_light_mode.svg"
+              darkModeLogo={logoDarkTheme}
+              lightModeLogo={logoLightTheme}
             />
           </Link>
           <ul className="menu menu-horizontal flex space-x-3 mx-4 hover:bg-secondary-focus">
