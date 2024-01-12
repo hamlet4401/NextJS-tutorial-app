@@ -1,5 +1,5 @@
 // import { default as NavigationBar } from "./selectionMenu";
-import { default as NavigationBar } from "../components/side_menu/sideMenuDropdown";
+import { default as SideSelectionMenu } from "./sideSelectionMenu";
 
 export default function NotePadLayout({
   children,
@@ -14,7 +14,7 @@ export default function NotePadLayout({
     <section>
       <div className="flex">
         <div className="ml-2 mr-2">
-          <NavigationBar elements={options} />
+          <SideSelectionMenu />
         </div>
         <div className="center">{children}</div>
       </div>

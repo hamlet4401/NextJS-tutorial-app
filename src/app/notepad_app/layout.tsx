@@ -1,4 +1,4 @@
-import { default as SideMenu } from "./sideMenu";
+import { default as SideSelectionMenu } from "./sideSelectionMenu";
 
 export default function NotePadLayout({
   children,
@@ -9,7 +9,7 @@ export default function NotePadLayout({
     <section>
       <div className="flex">
         <div className="ml-2 mr-2">
-          <SideMenu />
+          <SideSelectionMenu />
         </div>
         <div className="text-center">{children}</div>
       </div>
