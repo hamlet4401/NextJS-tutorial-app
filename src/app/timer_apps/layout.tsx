@@ -1,4 +1,3 @@
-// import { default as NavigationBar } from "./selectionMenu";
 import { default as SideSelectionMenu } from "./sideSelectionMenu";
 
 export default function NotePadLayout({
@@ -6,18 +5,13 @@ export default function NotePadLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const options = {
-    "Hello World": <div>Button</div>,
-    option2: <div>Button</div>,
-  };
   return (
-    <section>
-      <div className="flex">
-        <div className="ml-2 mr-2">
-          <SideSelectionMenu />
-        </div>
-        <div className="center">{children}</div>
+    <div className="flex flex-row w-screen h-screen">
+      <div className="basis-1/4">
+        <SideSelectionMenu />
       </div>
-    </section>
+      <div className="basis-3/4">{children}</div>
+      <div className="basis-1/4"></div>
+    </div>
   );
 }

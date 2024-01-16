@@ -15,8 +15,8 @@ const SideSelectionMenu = () => {
     router.push(page);
   };
   return (
-    <div className="w-60">
-      <div className="flex-col mb-10">
+    <div className="">
+      <div className="flex-col">
         <SideMenuButtons
           iconSourceDarkMode={stopwatchDarkTheme}
           iconSourceLightMode={stopwatchLightTheme}

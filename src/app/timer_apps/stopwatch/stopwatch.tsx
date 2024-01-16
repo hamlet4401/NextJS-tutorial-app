@@ -83,7 +83,7 @@ export default function Stopwatch() {
 
   return (
     <div className="flex flex-col justify-center items-center h-3/6">
-      <div className="grid grid-cols-4 gap-2 text-7xl">
+      <div className="grid grid-cols-4 gap-2 text-7xl text-center">
         <div className="">{formatTimeValue(stopwatchTime.hours, 2)}h</div>
         <div className="">{formatTimeValue(stopwatchTime.minutes, 2)}m</div>
         <div className="">{formatTimeValue(stopwatchTime.seconds, 2)}s</div>

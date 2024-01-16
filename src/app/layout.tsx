@@ -18,10 +18,10 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme="cyberpunk">
       <body className={manrope.className}>
-        <div className="mt-2 ml-2 mr-2 mb-4">
+        <div className="mt-2 mx-2 mb-4">
           <TitleBar />
         </div>
-        <div className="flex">{children}</div>
+        <div className="mx-2">{children}</div>
       </body>
     </html>
   );
