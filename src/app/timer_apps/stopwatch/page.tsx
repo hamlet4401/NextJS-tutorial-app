@@ -3,7 +3,7 @@ import { default as Stopwatch } from "./stopwatch";
 
 const Page = () => {
   return (
-    <div>
+    <div className="h-full">
       <Stopwatch />
     </div>
   );
