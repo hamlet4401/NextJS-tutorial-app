@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { CSSProperties } from "react";
 import Image from "next/image";
 import { useDarkMode } from "usehooks-ts";
 
@@ -23,7 +23,14 @@ const LogoDependingOnTheme = (
       <Image
         src={logoImage}
         alt="Logo"
-        className={`object-scale-down h-${logoDependingOnThemeProps.height} w-auto`}
+        style={
+          {
+            "--height": `${Math.round(
+              logoDependingOnThemeProps.height / 4
+            )}rem`,
+          } as CSSProperties
+        }
+        className={"object-scale-down h-[var(--height)] w-auto"}
       />
     </div>
   );

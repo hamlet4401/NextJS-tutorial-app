@@ -23,7 +23,6 @@ const SideSelectionMenu = () => {
           alternativeIconText="Add icon"
           onClickEvent={() => {
             navigateToPage("/timer_apps/stopwatch");
-            console.log("Bytton pushed");
           }}
         >
           Stopwatch

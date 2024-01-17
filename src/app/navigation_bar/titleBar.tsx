@@ -13,7 +13,7 @@ const TitleBar = () => {
         <div className="flex space-x-6 items-center">
           <Link href="/">
             <LogoDependingOnTheme
-              height={4}
+              height={2}
               darkModeLogo={logoDarkTheme}
               lightModeLogo={logoLightTheme}
             />
