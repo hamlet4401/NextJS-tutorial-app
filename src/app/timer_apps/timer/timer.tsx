@@ -106,9 +106,9 @@ const Timer = () => {
   return (
     <div className="flex flex-col justify-center items-center h-3/6">
       <div className="grid grid-cols-3 gap-2 place-items-center text-l   placeholder-gray-400">
-        <text className="text-gray-400">Hours</text>
-        <text className="text-gray-400">Minutes</text>
-        <text className="text-gray-400">Seconds</text>
+        <label className="text-gray-400">Hours</label>
+        <label className="text-gray-400">Minutes</label>
+        <label className="text-gray-400">Seconds</label>
         <input
           type="text"
           min={0}

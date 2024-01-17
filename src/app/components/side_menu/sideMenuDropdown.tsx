@@ -19,7 +19,7 @@ const SideMenuDropdown = (sideMenuDropdownProps: SideMenuDropdownProps) => {
   };
 
   return (
-    <div>
+    <div className="w-full flex">
       {Object.entries(sideMenuDropdownProps.elements).map(
         ([menuItem, content]) => (
           <div
@@ -34,7 +34,9 @@ const SideMenuDropdown = (sideMenuDropdownProps: SideMenuDropdownProps) => {
               onChange={() => {}}
             />
             <div className="collapse-title">{menuItem}</div>
-            <div className="collapse-content">{content}</div>
+            <div className="collapse-content size-full flex justify-center items-center">
+              <div className="">{content}</div>
+            </div>
           </div>
         )
       )}

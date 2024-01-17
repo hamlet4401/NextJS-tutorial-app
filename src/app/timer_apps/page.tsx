@@ -1,14 +1,7 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import { default as Stopwatch } from "./stopwatch/stopwatch";
+import React from "react";
 
 const Page = () => {
-  return (
-    <div>
-      {" "}
-      <Stopwatch />
-    </div>
-  );
+  return <div></div>;
 };
 
 export default Page;
