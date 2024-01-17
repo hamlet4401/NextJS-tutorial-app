@@ -7,9 +7,13 @@ interface ThemeControllerProps {
 }
 
 const ThemeController = (themeControllerProps: ThemeControllerProps) => {
-  const storedTheme = localStorage.getItem("theme");
-  const currentTheme =
-    storedTheme || Object.keys(themeControllerProps.themes)[0];
+  let storedTheme: string | null = "";
+  let currentTheme = "";
+  if (typeof localStorage !== "undefined") {
+    storedTheme = localStorage.getItem("theme");
+  }
+  currentTheme = storedTheme || Object.keys(themeControllerProps.themes)[0];
+
   const { isDarkMode, toggle, enable, disable } = useDarkMode();
   const [selectedTheme, setSelectedTheme] = useState(currentTheme);
 
@@ -50,7 +54,9 @@ const ThemeController = (themeControllerProps: ThemeControllerProps) => {
                 onClick={() => {
                   darkTheme ? enable() : disable();
                   setSelectedTheme(theme);
-                  localStorage.setItem("theme", theme);
+                  if (typeof localStorage !== "undefined") {
+                    localStorage.setItem("theme", theme);
+                  }
                 }}
                 defaultChecked={selectedTheme === theme}
               />
