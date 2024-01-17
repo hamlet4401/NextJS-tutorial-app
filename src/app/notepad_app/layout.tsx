@@ -6,13 +6,12 @@ export default function NotePadLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section>
-      <div className="flex">
-        <div className="ml-2 mr-2">
-          <SideSelectionMenu />
-        </div>
-        <div className="text-center">{children}</div>
+    <div className="flex flex-row w-screen h-screen">
+      <div className="basis-1/4">
+        <SideSelectionMenu />
       </div>
-    </section>
+      <div className="basis-3/4">{children}</div>
+      <div className="basis-1/4"></div>
+    </div>
   );
 }

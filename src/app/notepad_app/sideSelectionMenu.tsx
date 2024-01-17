@@ -13,7 +13,7 @@ import saveDarkTheme from "../../../public/dark_mode/save.svg";
 
 const SideSelectionMenu = () => {
   return (
-    <div className="w-60">
+    <div className="">
       <div className="flex-col mb-10">
         <SideMenuButtons
           iconSourceDarkMode={fileAddDarkTheme}
