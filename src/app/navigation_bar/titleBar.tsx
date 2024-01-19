@@ -24,7 +24,10 @@ const TitleBar = () => {
             </li>
           </ul>
         </div>
-        <ThemeButton />
+        <div className="flex space-x-6 items-center">
+          <LoginButton loginType="database" />
+          <ThemeButton />
+        </div>
       </div>
     </nav>
   );
