@@ -1,10 +1,9 @@
 import Link from "next/link";
 import React from "react";
 import { default as ThemeButton } from "./themeButton";
-import { default as LogoDependingOnTheme } from "../components/navigation_bar/logoDependingOnTheme";
+import { default as LoginButton } from "../components/navigation_bar/loginButton";
 
-import logoLightTheme from "../../../public/light_mode/bodidata_logo.svg";
-import logoDarkTheme from "../../../public/dark_mode/bodidata_logo.svg";
+import BodidataLogo from "../components/custom_logos/bodidataLogo";
 
 const TitleBar = () => {
   return (
@@ -12,11 +11,9 @@ const TitleBar = () => {
       <div className="flex justify-between items-center border-b-2">
         <div className="flex space-x-6 items-center">
           <Link href="/">
-            <LogoDependingOnTheme
-              height={2}
-              darkModeLogo={logoDarkTheme}
-              lightModeLogo={logoLightTheme}
-            />
+            <div className="h-4">
+              <BodidataLogo />
+            </div>
           </Link>
           <ul className="menu menu-horizontal flex space-x-3 mx-4 hover:bg-secondary-focus">
             <li>

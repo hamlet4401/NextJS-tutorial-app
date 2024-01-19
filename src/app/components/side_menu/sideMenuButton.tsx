@@ -3,9 +3,7 @@ import React, { ReactNode } from "react";
 import { default as LogoDependingOnTheme } from "../navigation_bar/logoDependingOnTheme";
 
 interface SideMenuButtonProps {
-  iconSourceDarkMode: string;
-  iconSourceLightMode: string;
-  alternativeIconText: string;
+  svgIcon: ReactNode;
   onClickEvent: () => void;
   children: ReactNode;
 }
@@ -17,11 +15,7 @@ const SideMenuButton = (sideMenuButtonProps: SideMenuButtonProps) => {
       onClick={() => sideMenuButtonProps.onClickEvent()}
     >
       {sideMenuButtonProps.children}
-      <LogoDependingOnTheme
-        darkModeLogo={sideMenuButtonProps.iconSourceDarkMode}
-        lightModeLogo={sideMenuButtonProps.iconSourceLightMode}
-        height={3}
-      />
+      {sideMenuButtonProps.svgIcon}
     </button>
   );
 };

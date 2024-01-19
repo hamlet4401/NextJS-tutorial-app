@@ -1,17 +1,8 @@
 "use client";
-import { default as SideMenuButtons } from "../components/side_menu/sideMenuButton";
-import { default as SideMenuDropdown } from "../components/side_menu/sideMenuDropdown";
-import { default as useNotepadStore } from "../store/notepadStore";
-
-import fileAddLightTheme from "../../../public/light_mode/file-plus.svg";
-import fileAddDarkTheme from "../../../public/dark_mode/file-plus.svg";
-
-import uploadLightTheme from "../../../public/light_mode/upload.svg";
-import uploadDarkTheme from "../../../public/dark_mode/upload.svg";
-
-import saveLightTheme from "../../../public/light_mode/save.svg";
-import saveDarkTheme from "../../../public/dark_mode/save.svg";
 import { ChangeEvent, useRef } from "react";
+
+import { default as SideMenuButtons } from "../components/side_menu/sideMenuButton";
+import { default as useNotepadStore } from "../store/notepadStore";
 
 const SideSelectionMenu = () => {
   const { setTitle, setNoteText, noteText, title } = useNotepadStore();
@@ -65,18 +56,43 @@ const SideSelectionMenu = () => {
     <div className="size-full">
       <div className="flex-col mb-10">
         <SideMenuButtons
-          iconSourceDarkMode={fileAddDarkTheme}
-          iconSourceLightMode={fileAddLightTheme}
-          alternativeIconText="Add icon"
+          svgIcon={
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M20 11.08V8l-6-6H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h6" />
+              <path d="M14 3v5h5M18 21v-6M15 18h6" />
+            </svg>
+          }
           onClickEvent={handleNewPage}
         >
           New file
         </SideMenuButtons>
         <div className="flex flex-col">
           <SideMenuButtons
-            iconSourceDarkMode={uploadDarkTheme}
-            iconSourceLightMode={uploadLightTheme}
-            alternativeIconText="Upload icon"
+            svgIcon={
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 8l-5-5-5 5M12 4.2v10.3" />
+              </svg>
+            }
             onClickEvent={handleFileUploadClick}
           >
             Upload
@@ -93,9 +109,23 @@ const SideSelectionMenu = () => {
         </div>
       </div>
       <SideMenuButtons
-        iconSourceDarkMode={saveDarkTheme}
-        iconSourceLightMode={saveLightTheme}
-        alternativeIconText="Save icon"
+        svgIcon={
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+            <polyline points="17 21 17 13 7 13 7 21"></polyline>
+            <polyline points="7 3 7 8 15 8"></polyline>
+          </svg>
+        }
         onClickEvent={handleFileSave}
       >
         Download
