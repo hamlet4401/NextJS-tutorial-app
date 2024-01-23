@@ -1,32 +1,112 @@
 "use client";
-import React, { useState } from "react";
+import React, { ChangeEvent, MutableRefObject, useRef, useState } from "react";
+import { default as LoadingAnimated } from "../custom_logos/loadingAnimated";
+
+// Usage example
+// const successLoginRef = useRef<HTMLDialogElement | null>(null);
+// const failedLoginRef = useRef<HTMLDialogElement | null>(null);
+
+// const handleConnection = (username: string, password: string) => {}
+
+// <LoginButton
+//   className="w-full"
+//   loginType="database"
+//   onConnection={handleConnection}
+//   successLoginRef={successLoginRef}
+//   failedLoginRef={failedLoginRef}
+// />;
 
 interface LoginButtonProps {
+  className?: string;
   loginType: string;
-  connectionFunction?: () => {};
+  onConnection: (username: string, password: string) => void;
+  successfulLoginPopUpRef: MutableRefObject<(message: string) => void>;
+
+  failedLoginPopUpRef: MutableRefObject<(message: string) => void>;
 }
 
 const LoginButton = (loginButtonProps: LoginButtonProps) => {
-  const loginElementId: string = loginButtonProps.loginType + "_connect";
   const loginDescriptionText: string = "Login to " + loginButtonProps.loginType;
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
+  const [loading, setLoading] = useState(false);
+
+  const loginModalRef = useRef<HTMLDialogElement | null>(null);
+  const successLoginPopUpRef = useRef<HTMLDialogElement | null>(null);
+  const [successfulLoginPopUpText, setSuccessfulLoginPopUpText] = useState("");
+  const failedLoginPopUpRef = useRef<HTMLDialogElement | null>(null);
+  const [failedLoginPopUpText, setFailedLoginPopUpText] = useState("");
+
+  const handleUsername = (event: ChangeEvent<HTMLInputElement>) => {
+    setUsername(event.target.value);
+  };
+
+  const handlePassword = (event: ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.target.value);
+  };
+
+  loginButtonProps.successfulLoginPopUpRef.current = (message: string) => {
+    const successLoginPopUp = successLoginPopUpRef.current as HTMLDialogElement;
+    const loginModal = loginModalRef.current as HTMLDialogElement;
+
+    loginModal.close();
+    setLoading(false);
+    setSuccessfulLoginPopUpText(message);
+    successLoginPopUp.showModal();
+
+    const timer = setTimeout(() => {
+      successLoginPopUp.close();
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  };
+  loginButtonProps.failedLoginPopUpRef.current = (message: string) => {
+    const failedLoginPopUp = failedLoginPopUpRef.current as HTMLDialogElement;
+
+    setLoading(false);
+    setFailedLoginPopUpText(message);
+    failedLoginPopUp.showModal();
+
+    const timer = setTimeout(() => {
+      failedLoginPopUp.close();
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  };
+
+  const submitButton = loading ? (
+    <button className="btn btn-primary w-full justify-center" disabled>
+      <div className="w-1/3 h-full">
+        <LoadingAnimated />
+      </div>
+    </button>
+  ) : (
+    <button
+      className="btn btn-primary w-full"
+      onClick={() => {
+        loginButtonProps.onConnection(username, password);
+        setLoading(true);
+      }}
+    >
+      Login
+    </button>
+  );
+
+  const className = "btn " + loginButtonProps.className;
   return (
     <div>
       <button
-        className="btn"
-        onClick={() =>
-          (
-            document.getElementById(loginElementId) as HTMLDialogElement
-          ).showModal()
-        }
+        className={className}
+        onClick={() => {
+          (loginModalRef.current as HTMLDialogElement).showModal();
+        }}
       >
-        Connect to database
+        Connect to {loginButtonProps.loginType}
       </button>
-      <dialog id={loginElementId} className="modal modal-top">
+      <dialog ref={loginModalRef} className="modal modal-top">
         <div className="modal-box flex flex-col items-center">
           <h2 className="font-bold text-xl mb-5">{loginDescriptionText}</h2>
           <div className="flex flex-col space-y-5 w-1/5">
@@ -34,12 +114,14 @@ const LoginButton = (loginButtonProps: LoginButtonProps) => {
               type="text"
               placeholder="Username"
               className="input input-bordered input-primary w-full"
+              onChange={handleUsername}
             />
             <div className="flex">
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder="Password"
                 className="input input-bordered input-primary w-full"
+                onChange={handlePassword}
               ></input>
               <label className="swap -ml-10">
                 <input
@@ -70,13 +152,34 @@ const LoginButton = (loginButtonProps: LoginButtonProps) => {
                 </svg>
               </label>
             </div>
-            <button
-              className="btn btn-primary w-full"
-              onClick={loginButtonProps.connectionFunction}
-            >
-              Login
-            </button>
+            {submitButton}
           </div>
+        </div>
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
+      <dialog
+        ref={successLoginPopUpRef}
+        id="loginModal"
+        className="modal modal-top"
+      >
+        <div className="modal-box border-2 border-green-400">
+          <h3 className="font-bold text-lg">Logged in successfully</h3>
+          <p className="py-4">{successfulLoginPopUpText}</p>
+        </div>
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
+      <dialog
+        ref={failedLoginPopUpRef}
+        id="failedLoginModal"
+        className="modal modal-top"
+      >
+        <div className="modal-box border-2 border-red-400">
+          <h3 className="font-bold text-lg">Login failed</h3>
+          <p className="py-4">{failedLoginPopUpText}</p>
         </div>
         <form method="dialog" className="modal-backdrop">
           <button>close</button>
