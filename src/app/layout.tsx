@@ -21,7 +21,11 @@ export default function RootLayout({
         <div className="mt-2 mx-2 mb-4">
           <TitleBar />
         </div>
-        <div className="mx-2">{children}</div>
+        <div className="flex flex-row w-screen h-screen">
+          <div className="basis-1/4"></div>
+          <div className="basis-3/4">{children}</div>
+          <div className="basis-1/4"></div>
+        </div>
       </body>
     </html>
   );
