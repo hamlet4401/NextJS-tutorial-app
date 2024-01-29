@@ -5,7 +5,7 @@ import { default as DatabaseConnection } from "../database/databaseConnection";
 import { ListDatabases, CheckConnection } from "../database/databaseMethods";
 import { default as useDatabaseStore } from "../store/databaseStore";
 
-const sideSelectionMenu = () => {
+const SideSelectionMenu = () => {
   const [loggedIn, setLoggedIn] = useState(
     localStorage.getItem("databaseLoggedIn") === "true" ? true : false
   );
@@ -94,4 +94,4 @@ const sideSelectionMenu = () => {
   );
 };
 
-export default sideSelectionMenu;
+export default SideSelectionMenu;

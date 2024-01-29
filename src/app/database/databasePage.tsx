@@ -2,9 +2,9 @@
 import React from "react";
 import { default as useDatabaseStore } from "../store/databaseStore";
 
-const databasePage = () => {
+const DatabasePage = () => {
   const { selectedDatabase } = useDatabaseStore();
   return <div>Selected Database: {selectedDatabase}</div>;
 };
 
-export default databasePage;
+export default DatabasePage;
