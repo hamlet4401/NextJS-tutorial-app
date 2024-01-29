@@ -1,32 +1,27 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import { useDarkMode } from "usehooks-ts";
+import { useEffect, useState } from "react";
 
 interface ThemeControllerProps {
   themes: Record<string, boolean>;
 }
 
 const ThemeController = (themeControllerProps: ThemeControllerProps) => {
-  let storedTheme: string | null = "";
-  let currentTheme = "";
+  let initialTheme: string = "cyberpunk";
   if (typeof localStorage !== "undefined") {
-    storedTheme = localStorage.getItem("theme");
+    initialTheme = localStorage.getItem("theme") || "cyberpunk";
   }
-  currentTheme = storedTheme || Object.keys(themeControllerProps.themes)[0];
-
-  const { isDarkMode, toggle, enable, disable } = useDarkMode();
-  const [selectedTheme, setSelectedTheme] = useState(currentTheme);
+  const [currentTheme, setCurrentTheme] = useState(initialTheme);
 
   useEffect(() => {
-    const isDark = themeControllerProps.themes[currentTheme];
-    isDark ? enable() : disable();
-
-    localStorage.setItem("usehooks-ts-dark-mode", isDark.toString());
-  }, [enable, disable]);
+    document.documentElement.setAttribute(
+      "data-theme",
+      initialTheme || "cyberpunk"
+    );
+  });
 
   return (
-    <div className="dropdown">
-      <div tabIndex={0} role="button" className="btn m-1">
+    <div className="size-full dropdown">
+      <div tabIndex={0} role="button" className="btn size-full">
         Theme
         <svg
           width="12px"
@@ -42,27 +37,27 @@ const ThemeController = (themeControllerProps: ThemeControllerProps) => {
         tabIndex={0}
         className="dropdown-content z-[1] p-2 shadow-2xl bg-base-300 rounded-box w-52"
       >
-        {Object.entries(themeControllerProps.themes).map(
-          ([theme, darkTheme]) => (
-            <li key={theme}>
-              <input
-                type="radio"
-                name="theme-dropdown"
-                className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                aria-label={theme}
-                value={theme.toLowerCase()}
-                onClick={() => {
-                  darkTheme ? enable() : disable();
-                  setSelectedTheme(theme);
-                  if (typeof localStorage !== "undefined") {
-                    localStorage.setItem("theme", theme);
-                  }
-                }}
-                defaultChecked={selectedTheme === theme}
-              />
-            </li>
-          )
-        )}
+        {Object.entries(themeControllerProps.themes).map(([theme]) => (
+          <li key={theme}>
+            <input
+              data-choosed-theme={theme.toLowerCase()}
+              data-key={theme.toLowerCase()}
+              type="radio"
+              name="theme-dropdown"
+              className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+              aria-label={theme}
+              value={theme.toLowerCase()}
+              onChange={() => {
+                localStorage.setItem("theme", theme.toLowerCase());
+                setCurrentTheme(theme.toLowerCase());
+                document.documentElement.setAttribute(
+                  "data-theme",
+                  theme.toLowerCase()
+                );
+              }}
+            />
+          </li>
+        ))}
       </ul>
     </div>
   );

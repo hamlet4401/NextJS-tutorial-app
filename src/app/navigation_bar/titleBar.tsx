@@ -7,7 +7,7 @@ import BodidataLogo from "../components/custom_logos/bodidataLogo";
 const TitleBar = () => {
   return (
     <nav className="">
-      <div className="flex justify-between items-center border-b-2 border-current">
+      <div className="size-full flex justify-between items-center border-b-2 border-current">
         <div className="flex space-x-6 items-center">
           <Link href="/">
             <div className="h-4">
@@ -26,7 +26,7 @@ const TitleBar = () => {
             </li>
           </ul>
         </div>
-        <div className="flex space-x-6 items-center">
+        <div className="flex w-26 mb-2">
           <ThemeButton />
         </div>
       </div>

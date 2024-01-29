@@ -7,7 +7,7 @@ const ThemeButton = () => {
     Night: true,
   };
   return (
-    <div>
+    <div className="size-full">
       <ThemeController themes={themes} />
     </div>
   );

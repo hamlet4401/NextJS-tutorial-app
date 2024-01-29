@@ -2,8 +2,8 @@
 import { MongoClient } from "mongodb";
 
 async function ConnectToDatabase(uri: string): Promise<MongoClient | null> {
-  const { MongoClient, ServerApiVersion } = require("mongodb");
-  const client = new MongoClient(uri, {
+  const { MongoClient: MongoDbClient, ServerApiVersion } = require("mongodb");
+  const client = new MongoDbClient(uri, {
     serverApi: {
       version: ServerApiVersion.v1,
       strict: true,

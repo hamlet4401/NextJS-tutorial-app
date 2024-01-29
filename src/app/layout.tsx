@@ -16,9 +16,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" data-theme="cyberpunk">
+    <html lang="en">
       <body className={manrope.className}>
-        <div className="mt-2 mx-2 mb-4">
+        <div className="mt-2 ml-2 mr-7 mb-4">
           <TitleBar />
         </div>
         <div className="flex flex-row w-screen h-screen">
