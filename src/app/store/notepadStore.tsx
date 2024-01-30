@@ -14,4 +14,11 @@ const useNotepadStore = create<NotepadStore>((set: any) => ({
   setNoteText: (newNoteText: string) => set({ noteText: newNoteText }),
 }));
 
+export const resetNotepadStore = () => {
+  useNotepadStore.setState({
+    title: "undefined.txt",
+    noteText: "",
+  });
+};
+
 export default useNotepadStore;
