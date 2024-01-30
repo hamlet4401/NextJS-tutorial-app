@@ -18,8 +18,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={manrope.className}>
-        <div className="mt-2 ml-2 mr-7 mb-4">
-          <TitleBar />
+        <div className="size-full border-b-2 border-current">
+          <div className="mt-2 ml-2 mr-7">
+            <TitleBar />
+          </div>
         </div>
         <div className="flex flex-row w-screen h-screen">
           <div className="basis-1/4"></div>

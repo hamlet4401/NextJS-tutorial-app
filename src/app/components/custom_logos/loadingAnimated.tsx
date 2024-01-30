@@ -12,9 +12,9 @@ const LoadingAnimated = () => {
       <circle
         cx="50"
         cy="50"
-        stroke-width="10"
+        strokeWidth="10"
         r="25"
-        stroke-dasharray="100 40"
+        strokeDasharray="100 40"
       ></circle>
     </svg>
   );

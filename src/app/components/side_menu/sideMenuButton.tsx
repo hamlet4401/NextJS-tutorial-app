@@ -11,7 +11,7 @@ interface SideMenuButtonProps {
 const SideMenuButton = (sideMenuButtonProps: SideMenuButtonProps) => {
   return (
     <button
-      className="btn w-full justify-between"
+      className="btn w-full justify-between bg-base-300"
       onClick={() => sideMenuButtonProps.onClickEvent()}
     >
       {sideMenuButtonProps.children}

@@ -79,7 +79,7 @@ const LoginButton = (loginButtonProps: LoginButtonProps) => {
 
   const submitButton = loading ? (
     <button className="btn btn-primary w-full justify-center" disabled>
-      <div className="w-1/3 h-full">
+      <div className="w-auto h-full">
         <LoadingAnimated />
       </div>
     </button>
@@ -95,7 +95,8 @@ const LoginButton = (loginButtonProps: LoginButtonProps) => {
     </button>
   );
 
-  const className = "btn " + loginButtonProps.className;
+  const className =
+    "btn bg-base-300 border-1 border-primary " + loginButtonProps.className;
   return (
     <div>
       <button

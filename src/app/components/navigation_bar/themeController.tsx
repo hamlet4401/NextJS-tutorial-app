@@ -21,7 +21,7 @@ const ThemeController = (themeControllerProps: ThemeControllerProps) => {
 
   return (
     <div className="size-full dropdown">
-      <div tabIndex={0} role="button" className="btn size-full">
+      <div tabIndex={0} role="button" className="btn size-full bg-base-300">
         Theme
         <svg
           width="12px"
