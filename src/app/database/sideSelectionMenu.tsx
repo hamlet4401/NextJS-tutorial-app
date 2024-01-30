@@ -7,7 +7,10 @@ import { default as useDatabaseStore } from "../store/databaseStore";
 
 const SideSelectionMenu = () => {
   const [loggedIn, setLoggedIn] = useState(
-    localStorage.getItem("databaseLoggedIn") === "true" ? true : false
+    typeof window !== "undefined" &&
+      localStorage.getItem("databaseLoggedIn") === "true"
+      ? true
+      : false
   );
   const [databaseList, setDatabaseList] = useState<string[]>([]);
   const successLoginRef = useRef<(message: string) => void>(() => {});
@@ -16,9 +19,12 @@ const SideSelectionMenu = () => {
   const { setSelectedDatabase } = useDatabaseStore();
 
   const verifyDatabaseConnection = async () => {
-    const uri = localStorage.getItem("databaseUri");
+    const uri =
+      typeof window !== "undefined"
+        ? localStorage.getItem("databaseUri")
+        : null;
     const connection: string = await CheckConnection(uri);
-    if (connection === "true")
+    if (connection === "true" && typeof window !== "undefined")
       localStorage.setItem("databaseLoggedIn", connection);
     return connection;
   };
