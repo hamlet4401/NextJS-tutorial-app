@@ -16,7 +16,7 @@ const SideSelectionMenu = () => {
   const successLoginRef = useRef<(message: string) => void>(() => {});
   const failedLoginRef = useRef<(message: string) => void>(() => {});
 
-  const { setSelectedDatabase } = useDatabaseStore();
+  const { setSelectedDatabase, setActiveIndex } = useDatabaseStore();
 
   const verifyDatabaseConnection = async () => {
     const uri =
@@ -42,7 +42,9 @@ const SideSelectionMenu = () => {
   };
 
   const handleSignOut = () => {
+    setActiveIndex(-1);
     setLoggedIn(false);
+    setSelectedDatabase("");
     localStorage.setItem("databaseUri", "");
     localStorage.setItem("databaseLoggedIn", "false");
   };
@@ -59,42 +61,50 @@ const SideSelectionMenu = () => {
     }
   }, [loggedIn]);
 
-  const hiddenButtonClassName = "h-1/6 w-full hidden";
-  const buttonClassName = "h-1/6 w-full";
-
   return (
     <div className="flex size-full justify-center">
       <div className="w-3/4">
-        <div className={loggedIn ? buttonClassName : hiddenButtonClassName}>
-          <div className="h-full flex flex-col justify-between">
-            <select
-              className="select select-primary w-full max-w-xs text-center"
-              onChange={(event) => {
-                setSelectedDatabase(event.target.value);
-              }}
-            >
-              <option disabled selected>
-                Select database
-              </option>
-              {databaseList.map((database, index) => (
-                <option key={index} value={database}>
-                  {database}
+        {loggedIn && (
+          <div className="h-1/6 w-full">
+            <div className="h-full flex flex-col justify-between">
+              <select
+                className="select select-primary w-full max-w-xs text-center"
+                value="none"
+                onChange={(event) => {
+                  setActiveIndex(-1);
+                  setSelectedDatabase(event.target.value);
+                }}
+              >
+                <option disabled value="none">
+                  Select database
                 </option>
-              ))}
-              ;
-            </select>
-            <button className="btn w-full" onClick={handleSignOut}>
-              Sign out
-            </button>
+                {databaseList.map((database, index) => (
+                  <option key={index} value={database}>
+                    {database}
+                  </option>
+                ))}
+                ;
+              </select>
+              <button
+                className="btn w-full bg-base-300 border-1 border-primary"
+                onClick={handleSignOut}
+              >
+                Sign out
+              </button>
+            </div>
           </div>
-        </div>
-        <LoginButton
-          className={loggedIn ? hiddenButtonClassName : buttonClassName}
-          loginType="database"
-          onConnection={handleConnection}
-          successfulLoginPopUpRef={successLoginRef}
-          failedLoginPopUpRef={failedLoginRef}
-        />
+        )}
+        {!loggedIn && (
+          <div>
+            <LoginButton
+              className="h-1/6 w-full"
+              loginType="database"
+              onConnection={handleConnection}
+              successfulLoginPopUpRef={successLoginRef}
+              failedLoginPopUpRef={failedLoginRef}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

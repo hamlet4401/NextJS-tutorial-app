@@ -1,19 +1,15 @@
 "use server";
-import { MongoClient } from "mongodb";
+import { MongoClient, Db, Collection } from "mongodb";
 
 async function ConnectToDatabase(uri: string): Promise<MongoClient | null> {
-  const { MongoClient: MongoDbClient, ServerApiVersion } = require("mongodb");
-  const client = new MongoDbClient(uri, {
-    serverApi: {
-      version: ServerApiVersion.v1,
-      strict: true,
-      deprecationErrors: true,
-    },
-  });
-  await client.connect();
-
-  console.log("Connected");
-  return client;
+  try {
+    const client = new MongoClient(uri);
+    await client.connect();
+    return client;
+  } catch (error) {
+    console.error(`Failed to connect to the database. ${error}`);
+    return null;
+  }
 }
 
 export async function CheckConnection(uri: string | null): Promise<string> {
@@ -31,10 +27,8 @@ export async function CheckConnection(uri: string | null): Promise<string> {
     }
   } catch (error) {
     if (typeof error === "string") {
-      // TypeScript should know it's a string here
       return error;
     } else if (error instanceof Error) {
-      // Check that it's an actually Error object, before trying to access the error message
       return error.message;
     }
   }
@@ -63,24 +57,57 @@ export async function ListDatabases(uri: string | null) {
   }
 }
 
-export async function ExtractData(uri: string | null) {
+export async function ListCollections(
+  database: string,
+  uri: string | null
+): Promise<string[]> {
+  if (!uri) {
+    console.error("No connection URI provided.");
+    return [];
+  }
+
   try {
-    if (uri) {
-      const client: MongoClient | null = await ConnectToDatabase(uri);
-      const database = client?.db("sample_mflix");
-
-      if (database) {
-        const movies = await database
-          .collection("movies")
-          .find({})
-          .sort({ metacritic: -1 })
-          .limit(20)
-          .toArray();
-
-        console.log(movies);
-      }
+    const client = await ConnectToDatabase(uri);
+    if (!client) {
+      return [];
     }
+
+    const connectedDatabase: Db = client.db(database);
+    const collections: Collection[] = await connectedDatabase.collections();
+
+    return collections.map((collection) => collection.collectionName);
   } catch (error) {
-    console.log(error);
+    console.error(`Failed to list collections. ${error}`);
+    return [];
+  }
+}
+// Write me a function that takes takes a collection as a string as input with the uri and returns the documents in that collection as a list of strings.
+export async function ListDocuments(
+  database: string,
+  collection: string,
+  uri: string | null
+): Promise<string[]> {
+  if (!uri) {
+    console.error("No connection URI provided.");
+    return [];
+  }
+
+  try {
+    const client = await ConnectToDatabase(uri);
+    if (!client) {
+      return [];
+    }
+
+    const documents = await client
+      .db(database)
+      .collection(collection)
+      .find()
+      .limit(2)
+      .toArray();
+    const content = documents.map((doc) => JSON.stringify(doc));
+    return content;
+  } catch (error) {
+    console.error(`Failed to list documents. ${error}`);
+    return [];
   }
 }
